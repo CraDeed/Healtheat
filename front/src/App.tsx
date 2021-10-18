@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from './components/pages/HomePage';
+import Header from './components/common/Header';
 
 const Wrapper = styled.div`
   width: 1024px;
@@ -14,11 +15,17 @@ const Wrapper = styled.div`
 
 function App() {
   return (
-    <Wrapper>
-      <Switch>
-        <Route exact component={HomePage} path="/" />
-      </Switch>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Header />
+      </Wrapper>
+
+      <Wrapper>
+        <Switch>
+          <Route exact component={HomePage} path="/" />
+        </Switch>
+      </Wrapper>
+    </>
   );
 }
 
