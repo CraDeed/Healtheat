@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
+import LoginModal from '../auth/LoginModal';
 
 const HeaderBlock = styled.div`
   display: flex;
@@ -40,15 +41,28 @@ const ButtonBlock = styled.button`
 `;
 
 const Header = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
   return (
     <>
       <HeaderBlock>
         <LeftBlock>left</LeftBlock>
-        <BrandHeader>헤더</BrandHeader>
+        <BrandHeader>
+          <Link to="/">헤더</Link>
+        </BrandHeader>
         <ButtonWrapper>
-          <button>
-            <Link to="/">로그인</Link>
+          <button onClick={openModal} style={{ cursor: 'pointer' }}>
+            로그인
           </button>
+          <LoginModal isModal={isModalOpen} closeModal={closeModal} />
           <ButtonBlock>
             <Link to="/signup">회원가입</Link>
           </ButtonBlock>
